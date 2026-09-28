@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 200 60% 92%;
+    --foreground: 220 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 15%;
+
+    --primary: 200 80% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 45 95% 60%;
+    --secondary-foreground: 220 25% 15%;
+
+    --muted: 200 30% 85%;
+    --muted-foreground: 220 15% 45%;
+
+    --accent: 340 75% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 80%;
+    --input: 220 20% 80%;
+    --ring: 200 80% 55%;
+
+    --radius: 1rem;
+
+    /* Game-specific tokens */
+    --game-bg-start: 195 70% 85%;
+    --game-bg-end: 210 60% 75%;
+    --game-ring: 220 30% 20%;
+    --game-ring-stroke: 12px;
+    --game-shadow: 220 40% 30%;
+    --game-winner-glow: 45 100% 55%;
+    --game-eliminated: 0 60% 50%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 30% 10%;
+    --foreground: 200 20% 95%;
+
+    --card: 220 30% 15%;
+    --card-foreground: 200 20% 95%;
+
+    --popover: 220 30% 15%;
+    --popover-foreground: 200 20% 95%;
+
+    --primary: 200 80% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 45 95% 50%;
+    --secondary-foreground: 220 25% 10%;
+
+    --muted: 220 25% 20%;
+    --muted-foreground: 200 15% 60%;
+
+    --accent: 340 75% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 25% 25%;
+    --input: 220 25% 25%;
+    --ring: 200 80% 55%;
+    
+    --game-bg-start: 220 40% 15%;
+    --game-bg-end: 230 35% 20%;
+    --game-ring: 0 0% 85%;
+    
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Fredoka', sans-serif;
+  }
+}
+
+@layer utilities {
+  .game-gradient {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--game-bg-start)) 0%,
+      hsl(var(--game-bg-end)) 100%
+    );
+  }
+  
+  .winner-glow {
+    animation: winner-pulse 1.5s ease-in-out infinite;
+    box-shadow: 0 0 20px hsl(var(--game-winner-glow) / 0.6);
+  }
+  
+  @keyframes winner-pulse {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(var(--game-winner-glow) / 0.4);
+    }
+    50% { 
+      box-shadow: 0 0 40px hsl(var(--game-winner-glow) / 0.8);
+    }
+  }
+  
+  @keyframes flag-fall {
+    0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(200px) rotate(180deg); }
+  }
+  
+  .flag-eliminated {
+    animation: flag-fall 0.8s ease-in forwards;
+  }
+  
+  @keyframes bounce-in {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  .bounce-in {
+    animation: bounce-in 0.4s ease-out forwards;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+  
+  .transform-gpu {
+    transform: translateZ(0);
+  }
+}
